@@ -14,7 +14,6 @@
 package spinner
 
 import (
-	"encoding/hex"
 	"errors"
 	"fmt"
 	"io"
@@ -402,8 +401,7 @@ func (s *Spinner) erase() {
 		s.lastOutput = ""
 		return
 	}
-	del, _ := hex.DecodeString("7f")
-	for _, c := range []string{"\b", string(del), "\b", "\033[K"} { // "\033[K" for macOS Terminal
+	for _, c := range []string{"\b", " ", "\b"} { // "\033[K" for macOS Terminal
 		for i := 0; i < n; i++ {
 			fmt.Fprintf(s.Writer, c)
 		}
